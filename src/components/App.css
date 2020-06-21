@@ -2,6 +2,6 @@
 @import "./form/Addresses.css";
 @import "./map/Map.css";
 
-* {
-    font-family: 16px 'Roboto', sans-serif !important;
+body {
+    font-family: 16px 'Roboto', sans-serif;
 }

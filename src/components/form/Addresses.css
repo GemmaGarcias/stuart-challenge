@@ -25,6 +25,7 @@
     margin: 8px;
     border-color: transparent;
     padding-left: 5px;
+    font-family: 16px 'Roboto', sans-serif;
 }
 .input:focus {
     outline: none;
@@ -40,6 +41,7 @@
     color: #FFFFFF;
     margin: 8px;
     border: 0px;
+    font-family: 16px 'Roboto', sans-serif;
 }
 
 .button--state-disabled {
