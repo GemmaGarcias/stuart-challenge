@@ -5,6 +5,9 @@ import Addresses from './form/Addresses';
 import ToastrPanel from './toastrPanel/ToastrPanel';
 import './App.css';
 
+const API_KEY = process.env.API_KEY;
+let mapUrl = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`; 
+
 export default function App() {
   const [coordinates, setCoordinates] = useState({ pickup: null, dropoff: null });
   const [error, setError] = useState({ pickup: false, dropoff: false });
@@ -37,7 +40,6 @@ export default function App() {
       setDisplayToastr(true);
       setLoading(false);
     } catch(error) {
-      console.log(error)
       setLoading(false);
     }
   } 
@@ -49,7 +51,7 @@ export default function App() {
       }, 5000);
     }
   },[displayToastr]);
-
+  
   return (
     <React.Fragment>
       <div style={{width: "70vw", height: "90vh"}}>
@@ -64,7 +66,7 @@ export default function App() {
         </div>
         <WrappedMap 
           isMarkerShown={coordinates.pickup || coordinates.dropoff}
-          googleMapURL={'https://maps.googleapis.com/maps/api/js?key=AIzaSyD42XFQV9gGgBclEgi2z3B-SsjAgrw55Jk&callback=initMap'} 
+          googleMapURL={mapUrl} 
           loadingElement={<div style={{ height: "100%" }} />}
           containerElement={<div style={{ height: "100%" }} />}
           mapElement={<div style={{ height: "100%" }} />}
