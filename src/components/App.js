@@ -14,7 +14,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [displayToastr, setDisplayToastr] = useState(false);
 
-  const handleOnBlur = async (event) => {
+  const handleOnChange = async (event) => {
     const { value, name } = event.target;
     try {
       const response = await getGeocodeAddress({address: value});
@@ -57,7 +57,7 @@ export default function App() {
       <div style={{width: "70vw", height: "90vh"}}>
         <div className="container-app">
           <Addresses 
-            handleOnBlur={handleOnBlur} 
+            handleOnChange={handleOnChange} 
             submit={submit} 
             addressData={coordinates} 
             error={error}
