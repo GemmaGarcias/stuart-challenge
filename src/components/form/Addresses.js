@@ -1,31 +1,69 @@
-import React, { useEffect } from 'react';
-import { getJobsCoordinates } from '../../service/service';
+import React from 'react';
 import pickUpBadgeBlank from '../../assets/pickUpBadgeBlank.svg';
+import pickUpBadgeError from '../../assets/pickUpBadgeError.svg';
+import pickUpBadgePresent from '../../assets/pickUpBadgePresent.svg';
 import dropOffBadgeBlank from '../../assets/dropOffBadgeBlank.svg';
+import dropOffBadgeError from '../../assets/dropOffBadgeError.svg';
+import dropOffBadgePresent from '../../assets/dropOffBadgePresent.svg';
 
-export default function Addresses() {
-
-  function handleOnBlur() {
-    try {
-      const response = getJobsCoordinates();
-      console.log(response)
-    } catch(error) {
-      console.log(error)
+export default function Addresses(props) {
+  const {handleOnBlur, addressData, submit, error, loading} = props;
+  
+  function validateIcon(error, type) {
+    switch (type){
+        case 'pickup':
+          if(!error.pickup && isNull(addressData.pickup)){
+            return pickUpBadgeBlank;
+          } else if(error.pickup && isNull(addressData.pickup)){
+            return pickUpBadgeError;
+          } else {
+            return pickUpBadgePresent;
+          }
+        case 'dropoff':
+          if(!error.dropoff && isNull(addressData.dropoff)){
+            return dropOffBadgeBlank;
+          } else if(error.dropoff && isNull(addressData.dropoff)){
+            return dropOffBadgeError;
+          } else {
+            return dropOffBadgePresent;
+          }
+        default:
+          return;
     }
-  } 
+  }
+
+  function validateSubmit() {
+    let disableButton = isNull(addressData.pickup) || isNull(addressData.dropoff) || error.pickup || error.dropoff;
+    return disableButton;
+  }
+
+  function isNull(item) {
+    return item === null;
+  }
 
   return (
     <div className="container">
-      <form>
+      <form onSubmit={submit}>
         <label className="label">
-          <img src={pickUpBadgeBlank} className="imgIcon"/>
-          <input type="text" name="pickUp" className="input" placeholder="Pick up address" onBlur={ handleOnBlur }/>
+          <img src={validateIcon(error, "pickup")} className="imgIcon"/>
+          <input 
+            type="text" 
+            name="pickup" 
+            className="input" 
+            placeholder="Pick up address" 
+            onBlur={ handleOnBlur } />
         </label>
         <label className="label">
-          <img src={dropOffBadgeBlank} className="imgIcon"/>
-          <input type="text" name="dropOff" className="input" placeholder="Dropp off address"/>
+          <img src={validateIcon(error, "dropoff")} className="imgIcon"/>
+          <input 
+            type="text" 
+            name="dropoff" 
+            className="input" 
+            placeholder="Dropp off address"
+            onBlur={ handleOnBlur }/>
         </label>
-        <input type="submit" value="Create job" className="button" />
+        <input type="submit" value={loading ? "Creating..." : "Create job"} 
+          className={validateSubmit() || loading ? "button button--state-disabled" : "button"} />
       </form>
     </div>
   );

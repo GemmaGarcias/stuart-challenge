@@ -43,6 +43,9 @@
     border: 0px;
     font-family: 16px 'Roboto', sans-serif;
 }
+.button:focus {
+    outline: none;
+}
 
 .button--state-disabled {
     opacity: 50%;
