@@ -1,11 +1,8 @@
 .container {
     border-radius: 8px;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.10);
-    position: absolute;
-    z-index: 20;
     background: white;
     padding: 16px;
-    margin: 32px;
 }
 
 .label {
@@ -19,7 +16,7 @@
 .input {
     border-radius: 4px;
     height: 32px;
-    width: 30vw;
+    width: 20vw;
     background: #F0F3F7;
     color: #8596A6;
     margin: 8px;
@@ -32,7 +29,7 @@
 }
 
 .button {
-    width: 31vw;
+    width: 21vw;
     float: right;
     border-radius: 4px;
     height: 40px;
