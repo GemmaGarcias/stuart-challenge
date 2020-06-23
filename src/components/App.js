@@ -9,7 +9,7 @@ export default function App() {
   const [error, setError] = useState({ pickup: false, dropoff: false });
   const [loading, setLoading] = useState(false);
 
-  async function handleOnBlur(event) {
+  const handleOnBlur = async (event) => {
     const { value, name } = event.target;
     try {
       const response = await getGeocodeAddress({address: value});
@@ -22,14 +22,14 @@ export default function App() {
     }
   } 
 
-  async function submit(event) {
+  const submit = async (event) => {
     event.preventDefault();
     const jobsQuery = {pickup: coordinates.pickup.address, dropoff: coordinates.dropoff.address};
     setLoading(true);
     await getJob(jobsQuery);
   }
 
-  async function getJob(jobsQuery) { 
+  const getJob = async (jobsQuery) => { 
     try {
       await getJobsCoordinates(jobsQuery);
       setLoading(false);

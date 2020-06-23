@@ -9,7 +9,7 @@ import dropOffBadgePresent from '../../assets/dropOffBadgePresent.svg';
 export default function Addresses(props) {
   const {handleOnBlur, addressData, submit, error, loading} = props;
   
-  function validateIcon(error, type) {
+  const validateIcon = (error, type) => {
     switch (type){
         case 'pickup':
           if(!error.pickup && isNull(addressData.pickup)){
@@ -32,12 +32,12 @@ export default function Addresses(props) {
     }
   }
 
-  function validateSubmit() {
+  const validateSubmit = () => {
     let disableButton = isNull(addressData.pickup) || isNull(addressData.dropoff) || error.pickup || error.dropoff;
     return disableButton;
   }
 
-  function isNull(item) {
+  const isNull = (item) => {
     return item === null;
   }
 
