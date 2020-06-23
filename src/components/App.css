@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import "./form/Addresses.css";
 @import "./map/Map.css";
 @import "./toastrPanel/ToastrPanel.css";
 
 body {
-    font-family: 16px 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
 }
 
 .container-app{
