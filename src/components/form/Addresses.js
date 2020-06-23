@@ -7,7 +7,7 @@ import dropOffBadgeError from '../../assets/dropOffBadgeError.svg';
 import dropOffBadgePresent from '../../assets/dropOffBadgePresent.svg';
 
 export default function Addresses(props) {
-  const {handleOnBlur, addressData, submit, error, loading} = props;
+  const {handleOnChange, addressData, submit, error, loading} = props;
   
   const validateIcon = (error, type) => {
     switch (type){
@@ -51,7 +51,7 @@ export default function Addresses(props) {
             name="pickup" 
             className="input" 
             placeholder="Pick up address" 
-            onBlur={ handleOnBlur } />
+            onChange={ handleOnChange } />
         </label>
         <label className="label">
           <img src={validateIcon(error, "dropoff")} className="imgIcon"/>
@@ -60,7 +60,7 @@ export default function Addresses(props) {
             name="dropoff" 
             className="input" 
             placeholder="Dropp off address"
-            onBlur={ handleOnBlur }/>
+            onChange={ handleOnChange }/>
         </label>
         <input type="submit" value={loading ? "Creating..." : "Create job"} 
           className={validateSubmit() || loading ? "button button--state-disabled" : "button"} />
