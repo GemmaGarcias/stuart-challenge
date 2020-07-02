@@ -1,7 +1,7 @@
 import React from "react";
-import { GoogleMap, withScriptjs, withGoogleMap, Marker } from "react-google-maps";
+import { GoogleMap, Marker, withScriptjs, withGoogleMap } from "react-google-maps";
 
-function Map(props) {
+export function Map(props) {
   const {addressData, isMarkerShown} = props;
   const addressMakers = [addressData.pickup, addressData.dropoff].filter((el) => el !== null);
 

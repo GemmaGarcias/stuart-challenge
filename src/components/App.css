@@ -1,5 +1,5 @@
 @import "./form/Addresses.css";
-@import "./map/Map.css";
+@import "./map/GoogleMap.css";
 @import "./toastrPanel/ToastrPanel.css";
 
 body {

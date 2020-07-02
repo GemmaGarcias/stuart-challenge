@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { getGeocodeAddress, getJobsCoordinates } from '../service/service';
-import { WrappedMap } from './map/Map';
-import Addresses from './form/Addresses';
-import ToastrPanel from './toastrPanel/ToastrPanel';
+import { WrappedMap } from './map/GoogleMap';
+const Addresses = React.lazy(() => import('./form/Addresses'));
+const ToastrPanel = React.lazy(() => import('./toastrPanel/ToastrPanel'));
 import './App.css';
 
 const API_KEY = process.env.API_KEY;
@@ -54,24 +54,27 @@ export default function App() {
   
   return (
     <React.Fragment>
-      <div style={{width: "70vw", height: "90vh"}}>
-        <div className="container-app">
-          <Addresses 
-            handleOnChange={handleOnChange} 
-            submit={submit} 
-            addressData={coordinates} 
-            error={error}
-            loading={loading}/>
-            {displayToastr && <ToastrPanel>Job has been created successfully!</ToastrPanel>}
+      
+      <Suspense fallback={<div>Loading...</div>}>
+        <div style={{width: "70vw", height: "90vh"}}>
+          <div className="container-app">
+            <Addresses 
+              handleOnChange={handleOnChange} 
+              submit={submit} 
+              addressData={coordinates} 
+              error={error}
+              loading={loading}/>
+              {displayToastr && <ToastrPanel>Job has been created successfully!</ToastrPanel>}
+          </div>
+          <WrappedMap 
+            isMarkerShown={coordinates.pickup || coordinates.dropoff}
+            googleMapURL={mapUrl} 
+            loadingElement={<div style={{ height: "100%" }} />}
+            containerElement={<div style={{ height: "100%" }} />}
+            mapElement={<div style={{ height: "100%" }} />}
+            addressData={coordinates} />   
         </div>
-        <WrappedMap 
-          isMarkerShown={coordinates.pickup || coordinates.dropoff}
-          googleMapURL={mapUrl} 
-          loadingElement={<div style={{ height: "100%" }} />}
-          containerElement={<div style={{ height: "100%" }} />}
-          mapElement={<div style={{ height: "100%" }} />}
-          addressData={coordinates} />   
-      </div>
+      </Suspense>
     </React.Fragment>
   );
 }
